@@ -1,0 +1,96 @@
+{
+    "back": [
+        {
+            "type": "ponytail",
+            "descriptions": [
+                "The hair ends in a nicely done ponytail.",
+                "The back of her hair is bound into a beautifull ponytail.",
+                "A single ponytail flows from the back of her head"
+            ],
+            "wgt": 2
+        },
+        {
+            "type": "doublePonytail",
+            "descriptions": [
+                "Her hair ends in an exotic double ponytail.",
+                "The back of her hair is bound into a double ponytail."
+            ],
+            "wgt": 3
+        },
+        {
+            "type": "braidedponytail",
+            "descriptions": [
+                "Her hair is braided into one long flowing ponytail",
+                "Her braided ponytail flows down her back."
+            ],
+            "wgt": 3
+        },
+        {
+            "type": "carousselbraidedponytail",
+            "descriptions": [
+                "Her long hair is braided in one big starburst carroussel that flows all the way down her back."
+            ],
+            "wgt": 3
+        },
+        {
+            "type": "frenchbraid",
+            "descriptions": [
+                "She wraps her hair into an arround-the-back french braid.",
+                "Her hair is shaped into a french braid"
+            ],
+            "wgt": 1
+        },
+        {
+            "type": "dutchbraid",
+            "descriptions": [
+                "Part of her hair is wrapped into an updo dutch braid"
+            ],
+            "wgt": 1
+        },
+        {
+            "type": "fivestrandbraid",
+            "descriptions": [
+                "The back of her hair is shaped into a gorgeus five-strand backbraid",
+                "Her hair ends in a five-strand backbraid",
+                "She expertly bound her hair into a five-strand backbraid"
+            ],
+            "wgt": 1
+        }
+    ],
+    "side": [
+        {
+            "type": "carousselbraid",
+            "descriptions": [
+                "A caroussel braid hangs from either side of her head, flowing down her shoulders."
+            ],
+            "wgt": 3
+        },
+        {
+            "type": "cornrow",
+            "descriptions": [
+                "Thick cornrows run along the side of her head",
+                "Cornrows run along the side of her head",
+                "Cornrows decorate the side of head"
+            ],
+            "wgt": 3
+        }
+    ],
+    "front": [
+        {
+            "type": "bangs",
+            "descriptions": [
+                "Two $haircolor bangs decorate her forehead.",
+                "Her hair is parted at the front by two $haircolor bangs."
+            ],
+            "wgt": 3
+        },
+        {
+            "type": "halobraid",
+            "descriptions": [
+                "The front of her hair is braided into a single halobraid",
+                "Her head is crowned by a beautifully done halobraid"
+            ],
+            "wgt": 3
+        }
+    ]
+}
