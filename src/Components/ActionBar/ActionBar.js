@@ -10,6 +10,13 @@ export default class ActionBar extends React.Component {
             </form>
             <div className="action-bar__row">
                 {this.buildOptionList()}
+                <button>{text}</button>
+                <button>{text}</button>
+                <button>{text}</button>
+                <button>{text}</button>
+                <button>{text}</button>
+
+
             </div>
         </div>
     )

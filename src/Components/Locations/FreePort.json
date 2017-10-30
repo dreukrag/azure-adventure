@@ -25,7 +25,7 @@
             },
             {
                 "X": 0,
-                "Y": -1,
+                "Y": 1,
                 "name":"North",                
                 "type": "generic",
                 "text":"You trod along."                
@@ -79,7 +79,7 @@
         "entryPoint": false,
         "description": ["The entrance to Freeport's dock, this area is busy as ever"],
         "X": 0,
-        "Y": -1,
+        "Y": 1,
         "leadsTo": [
             {
                 "X": 0,

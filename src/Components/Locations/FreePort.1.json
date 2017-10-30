@@ -1,92 +1,59 @@
 [
     {
-        "name":"Freeport's Main Dock",
+        "name":"Merchant's bay intersection",
         "internalName": "dockBay_main",
         "color":"red",
         "entryPoint": true,
-        "description": ["The main dock of Freeport, its rather crowded, not only with people but with numerous crates containers and whatnot. People come and go as they please, loading unloading and perhaps even stealing from the many ships moored here. This is the main section of the dock, its clear the Port Authority threats this place with a little more care then the rest of Freeport.",
-            "The concrete floor is cracked and rotten close to the water and the rest of it is covered by wooden planks in different states of decay. A series of cranes, some clearly of professional quality and others little more then wood and rope contraptions dot the water edge, ready to load and unload any of the ships. The endless ocean lies to the south, ships constantly appearing and disappearing in its horizon, the odd plane crossing the sky aswell."],
+        "description": ["To the west lies the imposing cargo door for the merchants bay, rusted shut for ages it's also been welded shut for good measure, and its hydraulics are all but gone having been looted long ago.","Merchants bay continue to the east, a long corridor used in the past by automated cargo drones, its been taken over by the station's denizens, the small service bays being repurposed into store front and as much floor space as possible being taken by small vendors."],
         "X": 0,
         "Y": 0,
         "leadsTo": [
             {
-                "X": -1,
-                "Y": 0,
-                "name":"West",                
-                "type": "generic",
-                "text":"You trod along."                
-            },
-            {
-                "X": 1,
-                "Y": 0,
-                "name":"East",                
-                "type": "generic",
-                "text":"You trod along."                
-            },
-            {
-                "X": 0,
-                "Y": -1,
+                "X": 0,"Y": 1,
                 "name":"North",                
                 "type": "generic",
                 "text":"You trod along."                
-            }
-        ]
-    },
-    {
-        "name":"Freeport's Western Dock",
-        "internalName": "dockBay_w",
-        "color":"blue",        
-        "entryPoint": false,
-        "description": ["The western portion of the docks is dedicated to ship servicing, the cranes in this part are enormous, meant to lift the ships onto the dry-docks carved into the concrete pier. The repair services are in great demand, most cranes are occupied and as soon as they're vacant another ship arrives for servicing. A few large repair barges sit out in the sea bobing with the tide, servicing the much larger ships that every now and then approach the port.",
-        "The concrete floor is cracked and rotten close to the water and the rest of it is covered by wooden planks in different states of decay. The endless ocean lies to the south, ships constantly appearing and disappearing in its horizon, the odd plane crossing the sky aswell."],
-        "X": -1,
-        "Y": 0,
-        "objects":[
-            {"name":"Fuel pump"}
-        ],
-        "leadsTo": [
+            },
             {
-                "X": 0,
-                "Y": 0,
+                "X": 0,"Y": -1,
+                "name":"south",                
                 "type": "generic",
-                "name": "Go back",
-                "text":"You walk back towards the main docks."
+                "text":"You trod along."                
+            },
+            {
+                "X": 1,"Y": 0,
+                "name":"East",                
+                "type": "generic",
+                "text":"You trod along."
             }
         ]
     },
     {
-        "name":"Freeport's Eastern Dock",
-        "internalName": "dockBay_e",
-        "color":"yellow",        
+        "name":"Merchant's bay-way",
+        "internalName": "dockBay_main",
+        "color":"red",
         "entryPoint": false,
-        "description": ["Not much space for ships in this portion of the docks, the pier is instead surrounded by a myriad of buildings, the largest of wich is that of the port authority."],
+        "description": ["Teeming with people of all kinds, it's quite hard to make your way trough"],
         "X": 1,
         "Y": 0,
         "leadsTo": [
             {
-                "X": 0,
-                "Y": 0,
+                "X": 0,"Y": 1,
+                "name":"North",                
                 "type": "generic",
-                "name": "Go back",
-                "text":"You walk back towards the main docks."                
-            }
-        ]
-    },
-    {
-        "name":"Freeport's Dockway",
-        "internalName": "dockway_Main",
-        "color":"orange",        
-        "entryPoint": false,
-        "description": ["The entrance to Freeport's dock, this area is busy as ever"],
-        "X": 0,
-        "Y": -1,
-        "leadsTo": [
+                "text":"You trod along."                
+            },
             {
-                "X": 0,
-                "Y": 0,
+                "X": 0,"Y": -1,
+                "name":"south",                
                 "type": "generic",
-                "name": "South",
-                "text":"You walk past the entrance."                
+                "text":"You trod along."                
+            },
+            {
+                "X": 1,"Y": 0,
+                "name":"East",                
+                "type": "generic",
+                "text":"You trod along."
             }
         ]
     }
