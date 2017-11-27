@@ -1,0 +1,15 @@
+        // {
+        //     "name": "Generic",
+        //     "internalName": "",
+        //     "icon": "landing",
+        //     "entryPoint": false,
+        //     "description": [""],
+        //     "X": 100,
+        //     "Y": 100,
+        //     "leadsTo": [
+        //         {"X": 100, "Y": 100, "name": "West", "type": "generic", "text": ""},
+        //         {"X": 100, "Y": 100, "name": "East", "type": "generic", "text": ""},
+        //         {"X": 100, "Y": 100, "name": "North", "type": "generic", "text": ""},
+        //         {"X": 100, "Y": 100, "name": "South", "type": "generic", "text": ""}
+        //     ]
+        // }

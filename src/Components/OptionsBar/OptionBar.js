@@ -16,7 +16,6 @@ export default class OptionBar extends React.Component {
     )
 
     componentDidMount=()=>{
-        console.log('options received the following props: ');
-        console.log(this.props);
+
     }
 }

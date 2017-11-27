@@ -36,7 +36,7 @@ $d-green:#1a4914;
         height: 100%;
         float: left;
         position: relative;
-        width: 55vw;
+        width: 60vw;
     }
 }
 
@@ -44,7 +44,7 @@ $d-green:#1a4914;
     &__cont{
         height: 90%;
         float:left;
-        width: 25vw;        
+        width: 20vw;        
     }
     &__main{
         background-color: $main;
@@ -64,11 +64,13 @@ $d-green:#1a4914;
         border-bottom: 2px solid $main-faded;
         border-left: 2px solid $main-faded;
         transform: translateX(5px);
+        text-shadow: 0px 0px 5px $sec;
     }
 
     button{
-        background-clip: $main-faded;
+        background-color: $main-faded;
     }
+    
 }
 
 .mini-map__main{
@@ -101,10 +103,66 @@ $d-green:#1a4914;
         background-color: $main;
         height: 100%;
         max-width: 200px;
-        width:100%;        
+        width:100%;
+        padding: 5px;  
+        
+        p{
+            color:whitesmoke;
+            border-bottom: $sec 1px solid;
+            margin-bottom: 2px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: capitalize;
+            
+        }
+
+        p.playerName{
+            font-size: 1em;
+        }
     }
+    
     button{
         background-clip: $main-faded;
+    }
+}
+
+.StatBar{
+    &__main{
+        height: 20px;
+        //margin-left: 10px;
+        //margin-right: 10px;
+        overflow: visible;
+        position: relative;
+        margin-bottom: 5px;
+    }
+    &__name{
+        color:$background;
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        font-size: 15px;        
+    }
+    &__bar{
+        background-color: $sec;
+        float: left;
+        height: 100%;
+        position: absolute;
+        z-index: 0;
+        transition: width 2s;
+        max-width: 100%;      
+    }
+    &__value{
+        color:whitesmoke;
+        position: absolute;
+        right: 5px;
+        z-index: 1;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        font-size: 15px;        
     }
 }
 
@@ -112,9 +170,10 @@ $d-green:#1a4914;
     &__main{
         color: whitesmoke;
         padding:15px;
-        height: 70%;
+        height: 75%;
         overflow: scroll;
         scroll-behavior: smooth;
+        overflow-x: hidden;
     }
 }
 
@@ -122,11 +181,11 @@ $d-green:#1a4914;
 {
     &__main{
         background-color: $background;
-        height: 30%;
+        height: 25%;
         width: 100%;
-        //transform: translateY(30%);
-        overflow: scroll;
-        scrollbar-base-color: $blk-main;
+        overflow: hidden;
+        overflow-x: hidden;
+        padding: 5px;
         .parser{
             width: 90%;
             margin: 0% 1%;
@@ -136,15 +195,17 @@ $d-green:#1a4914;
             }
         }
     }
-
+    &__buttons{
+        height: 100%;
+        width: 100%;
+    }
     &__row{
-        position: relative;
-        height: 70%;
+        //position: relative;
+        //height: 70%;
+        display: flex;
+        justify-content: space-evenly;
         button {
             float: left;
-            // position: relative;
-            // top:1%;
-            // left:0.5%;
             background-color: $sec;
             border-radius: 15px;
             border:none;

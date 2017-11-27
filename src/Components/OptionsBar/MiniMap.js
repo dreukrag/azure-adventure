@@ -11,7 +11,7 @@ export default class MiniMap extends React.Component {
     canvas;
     ctx;
 
-    isCurrentLocation = (x,y) => (this.props.currentLocation.X ==x && this.props.currentLocation.Y == y?true:false)
+    isCurrentLocation = (x,y) => (this.props.currentLocation.X ===x && this.props.currentLocation.Y === y?true:false)
 
     componentDidUpdate = () => {
         this.clearCanvas(this.ctx, this.canvas);
@@ -40,7 +40,7 @@ export default class MiniMap extends React.Component {
         for (var x = -1 * r; x <= r; x++) {
             for (var y = -1 * r; y <= r; y++) {
                 Draw(map.find((e) => {
-                    return e.X == rX + x && e.Y == rY + y;
+                    return e.X === rX + x && e.Y === rY + y;
                 }), x, y);
             }
         }
@@ -59,15 +59,13 @@ export default class MiniMap extends React.Component {
         var rectOrigin = { X: tileCoord.X - size / 2, Y: tileCoord.Y - size / 2 };
         //color for the tile
         ctx.fillStyle = "#613333";
-        x==0&&y==0?ctx.fillStyle = "#b09231":ctx.fillStyle = "#613333";
+        x===0&&y===0?ctx.fillStyle = "#b09231":ctx.fillStyle = "#613333";
         ctx.fillRect(rectOrigin.X, rectOrigin.Y, size, size);
         //Rectangular outline 
         ctx.clearRect(tileCoord.X - size / 3, tileCoord.Y - size / 3, size / 3 * 2, size / 3 * 2);
         //Center dot
         ctx.fillRect(tileCoord.X - 1, tileCoord.Y - 1, 2, 2);
 
-        console.log(obj.name);
-        
         //Returns unitary vectors for each of the directions the tile connects to
         //we invert X Y and Y value is negative due to operating in different planes:
         //Render has origin 0,0 on top left and inf,inf on bottom right

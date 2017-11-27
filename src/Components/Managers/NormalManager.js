@@ -1,36 +1,35 @@
 import React from 'react';
 
-export default class ActionBar extends React.Component {
+export default class NormalManager extends React.Component {
     mainPage = ({ rows: [], order: 0 });
     mainInventoryPage = ({ rows: { row1: [], row2: [], row3: [] }, order: 0 });
     currentPage = this.mainPage;
     render = () => (
         <div className="action-bar__main">
             <div className="action-bar__buttons">
-                {this.buildOptionList(this.props.currentLocation, this.props.screenType)}
+                {this.mainPage.rows}
             </div>
         </div>
     )
     
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         this.mainPage = this.makeMainPage(this.props.currentLocation);
         this.setCurrentPage(this.props.screenType)
         //this.mainInventoryPage = makeMainInventoryPage();        
     }
-    componentDidUpdate = () => {
+    componentWillUpdate = () => {
         this.mainPage = this.makeMainPage(this.props.currentLocation);
         this.setCurrentPage(this.props.screenType)
         //this.mainInventoryPage = makeMainInventoryPage();
     }
     setCurrentPage = (st) => {
+        
         if (st == "normal") { this.currentPage = this.mainPage; }
         else if (st == "simpleDialogue") { this.currentPage = this.simpleDialoguePage; }
         else if (st == "sd") { }
     }
-    getCurrentPage = () =>{
-        return this.currentPage;
-    }
+
     Page = () => ({ rows:[] , order: 0 })
 
     dir = (src, lt) => {
@@ -56,9 +55,9 @@ export default class ActionBar extends React.Component {
     disabledButton = (n) => (<button key={n} className="btn-disabled" />);
     moveToLocButton = (lt, n) => {
         console.log(typeof lt === "undefined")
-        if (typeof lt === "undefined") { return this.disabledButton(n) }
+        if (typeof lt === "undefined") { return this.disabledButton() }
         var a = (
-            <button key={n} onClick={(e) => { this.props.moveFunc(e, lt) }}>
+            <button key={"botao"+n} onClick={(e) => { this.props.moveFunc(e, lt) }}>
                 {lt.name}
             </button>
         )
@@ -148,7 +147,7 @@ export default class ActionBar extends React.Component {
         var OptLst2 = [];
         var OptLst3 = [];
         var pagesNumber;
-        console.log(st)
+
         if (st === "normal") {
             //check cL objects and assign them to first row, if there are more then 5 the 5th btn is used to lead to another page
             if (cL.hasOwnProperty("objects")) {
@@ -160,17 +159,17 @@ export default class ActionBar extends React.Component {
 
             //1st row - placeholder
             for (var i = 0; i < 5; i++) {
-                OptLst1.push(this.disabledButton(i));
+                OptLst1.push(this.disabledButton());
             }
             //check cL leadsTo and set the buttons onClick funct to correctly display and lead to the apropriate place.
             //2nd row
             for (var i = 0; i < 5; i++) {
                 var btn;
                 if (i === 0) {
-                    btn = this.disabledButton(i);
+                    btn = this.disabledButton();
                 } else if (i === 1) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "north" }), i);
-                } else { btn = this.disabledButton(i) }
+                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "north" }));
+                } else { btn = this.disabledButton() }
                 OptLst2.push(btn);
                 btn = null;
 
@@ -179,17 +178,17 @@ export default class ActionBar extends React.Component {
             for (var i = 0; i < 5; i++) {
                 var btn;
                 if (i === 0) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "west" }), i)
+                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "west" }))
                 } else if (i === 1) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "south" }), i);
+                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "south" }));
                 } else if (i === 2) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "east" }), i);
-                } else { btn = this.disabledButton(i) }
+                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "east" }));
+                } else { btn = this.disabledButton() }
                 OptLst3.push(btn);
                 btn = null;
             }
 
-        } /*else if (st === "simpleDialogue") {
+        } else if (st === "simpleDialogue") {
             for (var i = 0; i < 5; i++) {
                 var btn;
                 if (i == 0) { btn = this.AdvanceStateButton("yes"); }
@@ -200,12 +199,12 @@ export default class ActionBar extends React.Component {
             }
             for (var i = 0; i < 5; i++) { OptLst2.push(this.disabledButton()); }
             for (var i = 0; i < 5; i++) { OptLst3.push(this.disabledButton()); }
-        }*/
+        }
 
         //return the list once everything is done
-        rtn.push(<div key="1" className="action-bar__row">{OptLst1}</div>)
-        rtn.push(<div key="2" className="action-bar__row">{OptLst2}</div>)
-        rtn.push(<div key="3" className="action-bar__row">{OptLst3}</div>)
+        rtn.push(<div className="action-bar__row">{OptLst1}</div>)
+        rtn.push(<div className="action-bar__row">{OptLst2}</div>)
+        rtn.push(<div className="action-bar__row">{OptLst3}</div>)
         return rtn;
 
         // for (var i = 0; i < 5; i++) {
