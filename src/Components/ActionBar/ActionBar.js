@@ -7,30 +7,11 @@ export default class ActionBar extends React.Component {
     render = () => (
         <div className="action-bar__main">
             <div className="action-bar__buttons">
-                {this.buildOptionList(this.props.currentLocation, this.props.screenType)}
+                {this.buildOptionList(this.props.currentLocation, this.props.gameMode, this.props.interactionInfo, this.props.combatInfo)}
             </div>
         </div>
     )
-    
 
-    componentDidMount = () => {
-        this.mainPage = this.makeMainPage(this.props.currentLocation);
-        this.setCurrentPage(this.props.screenType)
-        //this.mainInventoryPage = makeMainInventoryPage();        
-    }
-    componentDidUpdate = () => {
-        this.mainPage = this.makeMainPage(this.props.currentLocation);
-        this.setCurrentPage(this.props.screenType)
-        //this.mainInventoryPage = makeMainInventoryPage();
-    }
-    setCurrentPage = (st) => {
-        if (st == "normal") { this.currentPage = this.mainPage; }
-        else if (st == "simpleDialogue") { this.currentPage = this.simpleDialoguePage; }
-        else if (st == "sd") { }
-    }
-    getCurrentPage = () =>{
-        return this.currentPage;
-    }
     Page = () => ({ rows:[] , order: 0 })
 
     dir = (src, lt) => {
@@ -142,27 +123,47 @@ export default class ActionBar extends React.Component {
     //cL = currentLocation
     //st = screen type, the game state, is it showing a location (normal), is it combat, or maybe dialogue (simple or complex)
     //dl = dialogue, when we want to display a dialogue
-    buildOptionList = (cL, st, dl = null) => {
+
+    buildEmptyActionBar = () => {
+        var rows =[];
+        for (var o =0; o<3;o++){
+            var row = []            
+            for (var i = 0; i < 5; i++) {
+                row.push(this.disabledButton(i));
+            }
+            rows.push(<div key={o} className="action-bar__row">{row}</div>);
+        }
+        return rows
+    }
+    buildMovementRow = ([template]) =>{
+        var row;
+        var i =0;
+        template.forEach(function(el) {
+            if(el ==null){row.push(this.disabledButton(i));i++}
+            else{row.push()}
+        }, this);
+    }
+    buildOptionList = (cL, st, interaction = null, combat = null) => {
         var rtn = [];
         var OptLst1 = [];
         var OptLst2 = [];
         var OptLst3 = [];
         var pagesNumber;
-        console.log(st)
+        var mainRow = this.buildEmptyActionBar()
         if (st === "normal") {
-            //check cL objects and assign them to first row, if there are more then 5 the 5th btn is used to lead to another page
-            if (cL.hasOwnProperty("objects")) {
-                if (cL.objects.length() <= 5) { pagesNumber = 1; }
-                else if (cL.objects.length() > 5) {
-                    pagesNumber = 1;
-                }
-            }
 
+            //First we grab the buttons for movement
+            mainRow[1].props.children[0] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "up" }))
+            mainRow[1].props.children[1] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "north" }))
+            mainRow[1].props.children[2] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "down" }))
+            mainRow[2].props.children[0] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "west" }))
+            mainRow[2].props.children[1] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "south" }))
+            mainRow[2].props.children[2] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "east" }))
+            console.log(mainRow);
             //1st row - placeholder
             for (var i = 0; i < 5; i++) {
                 OptLst1.push(this.disabledButton(i));
             }
-            //check cL leadsTo and set the buttons onClick funct to correctly display and lead to the apropriate place.
             //2nd row
             for (var i = 0; i < 5; i++) {
                 var btn;
@@ -189,7 +190,7 @@ export default class ActionBar extends React.Component {
                 btn = null;
             }
 
-        } /*else if (st === "simpleDialogue") {
+        }else if (st === "simpleDialogue") {
             for (var i = 0; i < 5; i++) {
                 var btn;
                 if (i == 0) { btn = this.AdvanceStateButton("yes"); }
@@ -200,19 +201,26 @@ export default class ActionBar extends React.Component {
             }
             for (var i = 0; i < 5; i++) { OptLst2.push(this.disabledButton()); }
             for (var i = 0; i < 5; i++) { OptLst3.push(this.disabledButton()); }
-        }*/
+        }else if (st ==="combat"){}
 
         //return the list once everything is done
         rtn.push(<div key="1" className="action-bar__row">{OptLst1}</div>)
         rtn.push(<div key="2" className="action-bar__row">{OptLst2}</div>)
         rtn.push(<div key="3" className="action-bar__row">{OptLst3}</div>)
-        return rtn;
+        return mainRow;
 
         // for (var i = 0; i < 5; i++) {
         //     var btn;
         //     btn = this.disabledButton()
         //     OptLst1.push(btn);
         //     btn = null;
+        // }
+        // //check cL objects and assign them to first row, if there are more then 5 the 5th btn is used to lead to another page
+        // if (cL.hasOwnProperty("objects")) {
+        //     if (cL.objects.length() <= 5) { pagesNumber = 1; }
+        //     else if (cL.objects.length() > 5) {
+        //         pagesNumber = 1;
+        //     }
         // }
     }
 }

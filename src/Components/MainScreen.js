@@ -12,7 +12,7 @@ export default class MainScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentScreenType:"normal",
+            gameMode:"normal",
             currentMapTile: {
                 name: "none",
                 entryPoint: false,
@@ -40,7 +40,7 @@ export default class MainScreen extends React.Component {
             <OptionBar currentLocation={this.state.currentMapTile} mapList={this.state.currentMap.map} />
             <div className="main-screen__gameArea wd-7">
                 <GameWorld currentLocation={this.state.currentMapTile} />
-                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} screenType={this.state.currentScreenType} />
+                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} gameMode={this.state.gameMode} interactionInfo={null} combatInfo={null} />
             </div>
             <CharacterBar plyChar={this.state.playerCharacter} />
         </div>
