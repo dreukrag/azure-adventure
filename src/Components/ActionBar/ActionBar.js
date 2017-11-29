@@ -160,37 +160,7 @@ export default class ActionBar extends React.Component {
             mainRow[2].props.children[1] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "south" }))
             mainRow[2].props.children[2] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "east" }))
             console.log(mainRow);
-            //1st row - placeholder
-            for (var i = 0; i < 5; i++) {
-                OptLst1.push(this.disabledButton(i));
-            }
-            //2nd row
-            for (var i = 0; i < 5; i++) {
-                var btn;
-                if (i === 0) {
-                    btn = this.disabledButton(i);
-                } else if (i === 1) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "north" }), i);
-                } else { btn = this.disabledButton(i) }
-                OptLst2.push(btn);
-                btn = null;
-
-            }
-            //3rd row
-            for (var i = 0; i < 5; i++) {
-                var btn;
-                if (i === 0) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "west" }), i)
-                } else if (i === 1) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "south" }), i);
-                } else if (i === 2) {
-                    btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "east" }), i);
-                } else { btn = this.disabledButton(i) }
-                OptLst3.push(btn);
-                btn = null;
-            }
-
-        }else if (st === "simpleDialogue") {
+        }else if (st === "interact") {
             for (var i = 0; i < 5; i++) {
                 var btn;
                 if (i == 0) { btn = this.AdvanceStateButton("yes"); }
@@ -221,6 +191,35 @@ export default class ActionBar extends React.Component {
         //     else if (cL.objects.length() > 5) {
         //         pagesNumber = 1;
         //     }
+        // }
+        // //1st row - placeholder
+        // for (var i = 0; i < 5; i++) {
+        //     OptLst1.push(this.disabledButton(i));
+        // }
+        // //2nd row
+        // for (var i = 0; i < 5; i++) {
+        //     var btn;
+        //     if (i === 0) {
+        //         btn = this.disabledButton(i);
+        //     } else if (i === 1) {
+        //         btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "north" }), i);
+        //     } else { btn = this.disabledButton(i) }
+        //     OptLst2.push(btn);
+        //     btn = null;
+
+        // }
+        // //3rd row
+        // for (var i = 0; i < 5; i++) {
+        //     var btn;
+        //     if (i === 0) {
+        //         btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "west" }), i)
+        //     } else if (i === 1) {
+        //         btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "south" }), i);
+        //     } else if (i === 2) {
+        //         btn = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "east" }), i);
+        //     } else { btn = this.disabledButton(i) }
+        //     OptLst3.push(btn);
+        //     btn = null;
         // }
     }
 }
