@@ -70,6 +70,9 @@
             "leadsTo": [
                 {"X": 0, "Y": 1, "name": "West", "type": "west", "text": "You leave the PA office"},
                 {"X": 1, "Y": 2, "name": "North", "type": "north", "text": "", "textClosed": "You wave your hand in front on the door's access panel but it simply beeps and remains closed", "closed":true}
+            ],
+            "objects":[
+                {"name":"Bureocrat","type":"interaction","dialogue":"bureocratDialogue_FP"}
             ]
         },
         {

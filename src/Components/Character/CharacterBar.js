@@ -23,21 +23,7 @@ export default class CharacterBar extends React.Component {
             </div>
         </div>
     )
-
     componentWillMount = () => {
-        this.maxCore = this.calcCoreStats(this.props.plyChar.coreStats);
-    }
-    componentWillUpdate = () => {
-        this.maxCore = this.calcCoreStats(this.props.plyChar.coreStats);
-    }
-
-    calcCoreStats = (ply) => {
-        var highVal = 0;
-        for (var property in ply) {
-            if (ply[property] >= highVal) {
-                highVal = ply[property];
-            }
-        }
-        return highVal;
+        this.maxCore = this.props.plyChar.level * 5;
     }
 }

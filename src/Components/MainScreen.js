@@ -24,13 +24,18 @@ export default class MainScreen extends React.Component {
             currentMap: [],
             playerCharacter: {
                 name: "player",
+                level:1,
                 combatStats: [{}],
                 coreStats: {
                     strength: 5,
                     inteligence: 3,
                     reflexes: 3,
                     agility: 4
-                }
+                },
+                inventory:[
+                    {name:"thingy", desc:"A thingamajig."},
+                    {name:"McGuffin", desc:"People would die over who gets to possess this."}
+                ]
             }
         }
     }
@@ -40,7 +45,7 @@ export default class MainScreen extends React.Component {
             <OptionBar currentLocation={this.state.currentMapTile} mapList={this.state.currentMap.map} />
             <div className="main-screen__gameArea wd-7">
                 <GameWorld currentLocation={this.state.currentMapTile} />
-                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} gameMode={this.state.gameMode} interactionInfo={null} combatInfo={null} />
+                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} gameMode={this.state.gameMode} interactionInfo={null} combatInfo={null} playerInfo = {this.state.playerCharacter}/>
             </div>
             <CharacterBar plyChar={this.state.playerCharacter} />
         </div>

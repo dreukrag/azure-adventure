@@ -1,0 +1,15 @@
+{
+    "bureocratDialogue_FP": {
+        "scenes":[
+            {
+                "action":"Hello",
+                "response":["The bureocrat motions for you to come close an take a seat.","You comply and before you can take your seat the civil servant ahead of you is already typying madly at their keyboard","They speak with a soft voice, surprisingly no bored and actually downright friendly","","<span style={color:'red'}>'Welcome to Freeport station! I hope you had a good travel. Now I need you to fill all of these...'</span>","They hand you a tablet with all the forms already loaded. As you take your time signing everything off the bureocrat keeps on typing their computer at an incredible speed.","You motion as being done to the person behind the table and they stretch a hand to collect the tablet","[red]'Alright, this is all, you're good to go. Remember that only personal weapons and armor are allowed inside freeport, you will leave everything else at the security checkpoint.','[red] If you do not reclaim them or renew the custody in one week anything left at the checkpoint will be sold off per Freeport Port Authority regulations. We are not responsible in any way for the safety of equipment past the contracted custody period.'","Having finished your business you bid goodbye to the civil servant and leave","With that done you think you can now enter freeport proper."],
+                "repeatable":false,
+                "changeMapVariables":[{"var":"hasGoneTroughCustoms", "val":true}]
+            },
+            {
+
+            }
+        ]
+    }
+}

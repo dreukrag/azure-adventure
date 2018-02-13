@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 
 export default class ActionBar extends React.Component {
@@ -66,6 +67,11 @@ export default class ActionBar extends React.Component {
         }
 
     };
+    inventoryButton = () => {
+        this.props.playerInfo.inventory.forEach( (itm) =>{
+            return <button className="btn-disabled" itemStorage = {itm} onClick={()=>{console.log(this.itemStorage)}}></button>
+        });
+    }
     makeMainPage = (cL) => {
         var thisPage = this.Page()
         var r1 = [];
@@ -135,6 +141,10 @@ export default class ActionBar extends React.Component {
         }
         return rows
     }
+
+    buildButtons = (thingToBecomeButton:Array<Number>) => {}
+    //buildButtons = (thingToBecomeButton:Object) => {}
+    
     buildMovementRow = ([template]) =>{
         var row;
         var i =0;
@@ -144,14 +154,20 @@ export default class ActionBar extends React.Component {
         }, this);
     }
     buildOptionList = (cL, st, interaction = null, combat = null) => {
+        this.buildButtons("a");
         var rtn = [];
         var OptLst1 = [];
         var OptLst2 = [];
         var OptLst3 = [];
         var pagesNumber;
+        //Builds a row full of disabled buttons
         var mainRow = this.buildEmptyActionBar()
-        if (st === "normal") {
 
+        //Now what should we render?
+        //(st === ?)
+
+        //Normal game movement stuff and interacting
+        if (st === "normal") {
             //First we grab the buttons for movement
             mainRow[1].props.children[0] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "up" }))
             mainRow[1].props.children[1] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "north" }))
@@ -159,6 +175,7 @@ export default class ActionBar extends React.Component {
             mainRow[2].props.children[0] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "west" }))
             mainRow[2].props.children[1] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "south" }))
             mainRow[2].props.children[2] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.type === "east" }))
+            mainRow[0].props.children[0] = this.inventoryButton();
             console.log(mainRow);
         }else if (st === "interact") {
             for (var i = 0; i < 5; i++) {
