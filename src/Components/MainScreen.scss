@@ -183,8 +183,8 @@ $d-green:#1a4914;
         background-color: $background;
         height: 25%;
         width: 100%;
-        overflow: hidden;
-        overflow-x: hidden;
+        //overflow: hidden;
+        //overflow-x: hidden;
         padding: 5px;
         .parser{
             width: 90%;
@@ -216,6 +216,12 @@ $d-green:#1a4914;
             margin:0.5%;
             font-weight: bold;
             text-align: center;
+        }
+        .btn-descriptionBox{
+            position: absolute;
+            background-color: $main-faded;
+            color:white;       
+            bottom:100%;     
         }
 
         button.btn-disabled {

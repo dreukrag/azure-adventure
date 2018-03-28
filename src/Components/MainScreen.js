@@ -6,6 +6,7 @@ import CharacterBar from './Character/CharacterBar';
 import GameWorld from './GameWorld';
 
 import freePort from './Locations/FreePort.json';
+import Interactions from './Locations/Interactions.json'
 
 export default class MainScreen extends React.Component {
 
@@ -22,6 +23,7 @@ export default class MainScreen extends React.Component {
                 leadsTo: []
             },
             currentMap: [],
+            currentInteraction:{},
             playerCharacter: {
                 name: "player",
                 level:1,
@@ -45,7 +47,7 @@ export default class MainScreen extends React.Component {
             <OptionBar currentLocation={this.state.currentMapTile} mapList={this.state.currentMap.map} />
             <div className="main-screen__gameArea wd-7">
                 <GameWorld currentLocation={this.state.currentMapTile} />
-                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} gameMode={this.state.gameMode} interactionInfo={null} combatInfo={null} playerInfo = {this.state.playerCharacter}/>
+                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} gameMode={this.state.gameMode} currentInteraction={this.state.currentInteraction} interactionFunc={this.changeCurrentInteraction} playerInfo = {this.state.playerCharacter}/>
             </div>
             <CharacterBar plyChar={this.state.playerCharacter} />
         </div>
@@ -59,6 +61,20 @@ export default class MainScreen extends React.Component {
                 return element.entryPoint === true;
             })
         })
+    }
+
+    changeCurrentInteraction = (event, key="") =>{
+        console.log("interaction interacted with")
+        console.log("looking up " + key)
+        event.preventDefault();
+        if(key=""){console.log("Invalid interaction");return}
+        let interaction = Interactions.key;
+        this.setState({
+            currentInteraction:interaction
+        });
+        if(this.state.currentInteraction==={}){
+            this.setState({gameMode:"normal"});
+        }else{this.setState({gameMode:"interaction"})}
     }
 
     moveToCoord = (event, lt) => {

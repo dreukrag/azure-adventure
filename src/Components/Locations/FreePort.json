@@ -14,8 +14,8 @@
             "X":-1,
             "Y": 0,
             "leadsTo": [
-                {"X": -2, "Y": 0, "name": "West", "type": "west", "text": "You move across the bulkhead to the next bay"},
-                {"X": 0, "Y": 0, "name": "East", "type": "east", "text": "You move across the bulkhead to the next bay"}
+                {"X": -2, "Y": 0, "name": "West", "type":"movement","movementType": "west", "text": "You move across the bulkhead to the next bay"},
+                {"X": 0, "Y": 0, "name": "East", "type":"movement","movementType": "east", "text": "You move across the bulkhead to the next bay"}
             ]
         },
         {
@@ -27,9 +27,9 @@
             "X":0,
             "Y": 0,
             "leadsTo": [
-                {"X": -1, "Y": 0, "name": "West", "type": "west", "text": "You move across the bulkhead to the next bay"},
-                {"X": 1, "Y": 0, "name": "East", "type": "east", "text": "You move across the bulkhead to the next bay"},
-                {"X": 0, "Y": 1, "name": "North", "type": "north", "text": "The security door opens as you aproach it, letting you inside the security checkpoint"}
+                {"X": -1, "Y": 0, "name": "West", "type":"movement","movementType": "west", "text": "You move across the bulkhead to the next bay"},
+                {"X": 1, "Y": 0, "name": "East", "type":"movement","movementType": "east", "text": "You move across the bulkhead to the next bay"},
+                {"X": 0, "Y": 1, "name": "North", "type":"movement","movementType": "north", "text": "The security door opens as you aproach it, letting you inside the security checkpoint"}
             ]
         },
         {
@@ -41,7 +41,7 @@
             "X":1,
             "Y": 0,
             "leadsTo": [
-                {"X": 0, "Y": 0, "name": "West", "type": "west", "text": "You move across the bulkhead to the next bay"}
+                {"X": 0, "Y": 0, "name": "West", "type":"movement","movementType": "west", "text": "You move across the bulkhead to the next bay"}
             ]
         },
         {
@@ -53,10 +53,10 @@
             "X": 0,
             "Y": 1,
             "leadsTo": [
-                {"X": -1, "Y": 1, "name": "West", "type": "west", "text": "","textClosed": "You wave your hand in front on the door's access panel but it simply beeps and remains closed", "closed":true},
-                {"X": 1, "Y": 1, "name": "East", "type": "east", "text": "You enter the office trough the open door"},
-                {"X": 0, "Y": 2, "name": "North", "type": "north", "text": "You wave your hand in front of the access panel. It beeps twice and them opens.","textClosed":"You aproach the arrival's gate and wave your hand in front of its access panel. It flashes red and refuses to open.", "closed":"hasGoneTroughCustoms"},
-                {"X": 0, "Y": 0, "name": "South", "type": "south", "text": ""}                
+                {"X": -1, "Y": 1, "name": "West", "type":"movement","movementType": "west", "text": "","textClosed": "You wave your hand in front on the door's access panel but it simply beeps and remains closed", "closed":true},
+                {"X": 1, "Y": 1, "name": "East", "type":"movement","movementType": "east", "text": "You enter the office trough the open door"},
+                {"X": 0, "Y": 2, "name": "North", "type":"movement","movementType": "north", "text": "You wave your hand in front of the access panel. It beeps twice and them opens.","textClosed":"You aproach the arrival's gate and wave your hand in front of its access panel. It flashes red and refuses to open.", "closed":"hasGoneTroughCustoms"},
+                {"X": 0, "Y": 0, "name": "South", "type":"movement","movementType": "south", "text": ""}                
             ]
         },
         {
@@ -68,11 +68,14 @@
             "X": 1,
             "Y": 1,
             "leadsTo": [
-                {"X": 0, "Y": 1, "name": "West", "type": "west", "text": "You leave the PA office"},
-                {"X": 1, "Y": 2, "name": "North", "type": "north", "text": "", "textClosed": "You wave your hand in front on the door's access panel but it simply beeps and remains closed", "closed":true}
+                {"X": 0, "Y": 1, "name": "West", "type":"movement","movementType": "west", "text": "You leave the PA office"},
+                {"X": 1, "Y": 2, "name": "North", "type":"movement","movementType": "north", "text": "", "textClosed": "You wave your hand in front on the door's access panel but it simply beeps and remains closed", "closed":true}
             ],
             "objects":[
-                {"name":"Bureocrat","type":"interaction","dialogue":"bureocratDialogue_FP"}
+                {"name":"Bureaucrat","type":"interaction","key":"freeport_entrance_bureaucrat"},
+                {"name":"test1","type":"interaction","key":""},
+                {"name":"test2","type":"interaction","key":""},
+                {"name":"test3","type":"interaction","key":""}                
             ]
         },
         {
@@ -84,8 +87,8 @@
             "X": 0,
             "Y": 2,
             "leadsTo": [
-                {"X": 0, "Y": 3, "name": "North", "type": "north", "text": "You enter one of the lifts"},
-                {"X": 0, "Y": 1, "name": "South", "type": "south", "text": ""}                
+                {"X": 0, "Y": 3, "name": "North", "type":"movement","movementType": "north", "text": "You enter one of the lifts"},
+                {"X": 0, "Y": 1, "name": "South", "type":"movement","movementType": "south", "text": ""}                
             ]
         },
         {
@@ -97,9 +100,9 @@
             "X": 0,
             "Y": 3,
             "leadsTo": [
-                {"name": "Market Plaza", "type": "area", "text": ["You press the button labelled 'Market Plaza'.","You feel the sudden acceleration as the turbo lift moves to your destination"]},
-                {"name": "Residential", "type": "area", "text": ["You press the button labelled 'Market Plaza'.","You feel the sudden acceleration as the turbo lift moves to your destination"], "textClosed":"After you press the button, a mechanical sounding voice responds 'ERROR AREA NOT AVAIABLE'", "closed":true},
-                {"X": 0, "Y": 2, "name": "Leave", "type": "south", "text": ""}
+                {"name": "Market Plaza", "type":"movement","movementType": "area", "text": ["You press the button labelled 'Market Plaza'.","You feel the sudden acceleration as the turbo lift moves to your destination"]},
+                {"name": "Residential", "type":"movement","movementType": "area", "text": ["You press the button labelled 'Market Plaza'.","You feel the sudden acceleration as the turbo lift moves to your destination"], "textClosed":"After you press the button, a mechanical sounding voice responds 'ERROR AREA NOT AVAIABLE'", "closed":true},
+                {"X": 0, "Y": 2, "name": "Leave", "type":"movement","movementType": "south", "text": ""}
             ]
         }
     ]
