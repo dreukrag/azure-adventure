@@ -35,8 +35,8 @@ export default class MainScreen extends React.Component {
                     agility: 4
                 },
                 inventory:[
-                    {name:"thingy", desc:"A thingamajig."},
-                    {name:"McGuffin", desc:"People would die over who gets to possess this."}
+                    {name:"thingy", desc:"A thingamajig.", type:"item"},
+                    {name:"McGuffin", desc:"People would die over who gets to possess this.",type:"item"}
                 ]
             }
         }
@@ -47,7 +47,7 @@ export default class MainScreen extends React.Component {
             <OptionBar currentLocation={this.state.currentMapTile} mapList={this.state.currentMap.map} />
             <div className="main-screen__gameArea wd-7">
                 <GameWorld currentLocation={this.state.currentMapTile} />
-                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} gameMode={this.state.gameMode} currentInteraction={this.state.currentInteraction} interactionFunc={this.changeCurrentInteraction} playerInfo = {this.state.playerCharacter}/>
+                <ActionBar currentLocation={this.state.currentMapTile} moveFunc={this.moveToCoord} gameMode={this.state.gameMode} currentInteraction={this.state.currentInteraction} interactionFunc={this.changeCurrentInteraction} playerInfo = {this.state.playerCharacter} stateFunc={this.changeGameState}/>
             </div>
             <CharacterBar plyChar={this.state.playerCharacter} />
         </div>
@@ -127,7 +127,11 @@ export default class MainScreen extends React.Component {
         }
     )
 
-    
+    changeGameState = (st) =>{
+        this.setState({
+            gameMode:st
+        })
+    }
 
     pushText = (txt) => {
         console.log(txt);

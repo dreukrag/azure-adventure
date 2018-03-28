@@ -1,9 +1,7 @@
 import React from 'react';
 import Button from './Button';
 export default class ActionBar extends React.Component {
-    mainPage = ({ rows: [], order: 0 });
-    mainInventoryPage = ({ rows: { row1: [], row2: [], row3: [] }, order: 0 });
-    currentPage = this.mainPage;
+
     render = () => (
         <div className="action-bar__main">
             <div className="action-bar__buttons">
@@ -13,8 +11,8 @@ export default class ActionBar extends React.Component {
     )
     //current location, screen type
     //This method checks the type of screen that was requested and renders the proper controls
-    disabledButton = (n) => (<button key={n} className="btn-disabled" />);
-    backButton =()=>(<button key={4} onClick={(e) => { this.buildOptionList(this.props.currentLocation, this.props.gameMode, this.props.interactionInfo, this.props.combatInfo) }}>Back</button>)
+    disabledButton = (n) => <button key={n} className="btn-disabled" />;
+    backButton =()=><button key={4} onClick={(e) => { this.props.stateFunc("normal") }}>Back</button>
     moveToLocButton = (lt, n) => {
         if (typeof lt === "undefined") { return this.disabledButton(n) }
         var a = (
@@ -24,13 +22,7 @@ export default class ActionBar extends React.Component {
         )
         return a
     };
-    inventoryButton = () => (
-        <Button />
-    )
-    //cL = currentLocation
-    //st = screen type, the game state, is it showing a location (normal), is it combat, or maybe dialogue (simple or complex)
-    //dl = dialogue, when we want to display a dialogue
-
+    inventoryButton = () => <button key={4} onClick={(e) => { this.props.stateFunc("inventory") }}>Inventory</button>
     buildEmptyActionBar = () => {
         var rows = [];
         for (var o = 0; o < 3; o++) {
@@ -44,75 +36,82 @@ export default class ActionBar extends React.Component {
             }
             rows.push(<div key={o} className="action-bar__row">{row}</div>);
         }
-        console.log(this.totalEntities(this.props.currentLocation));
         return rows
     }
 
-    totalEntities = (local =this.props.currentLocation) => {
-        if(local==null || local == undefined){return null}
-        var totalCount = 0;
-        totalCount += local.leadsTo? local.leadsTo.length:0;
-        totalCount += local.objects? local.objects.length:0;
-        
-        return totalCount;        
-    }
-
     //The default button set is the movement + inventory + actions
-    buildButtons = (thingToBecomeButtons = [[]], type = "") => {
-        var list = new Array();
-        //TO-DO:Typechecking?
-        //TO-DO:Maybe use normal for, to keep track of index and find the position desired
-        thingToBecomeButtons.forEach((ttbb,index) => {
-                //TO-DO:Make a button matching whater ttbb is
-                //TO-DO:Add button to the action bar
-                list.push(<Button objectToRepresent = {ttbb[0]} key={ttbb[1]}/>)
+    AssignButtons = (thingsToBecomeButtons:[{obj:{}, position:[]}], RowToAssignTo, insertDefaults="normal") => {
+        if(RowToAssignTo == undefined)return;
+        var currRow = 0;
+        var freePositionsInteract = [[0, 1, 2, 3], [3, 4], [3, 4]];
+        var freePositionsInventory = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3]];
+        
+        thingsToBecomeButtons.forEach((ttbb) => {
+                switch(ttbb.obj.type){
+                    case "movement":
+                        RowToAssignTo[ttbb.position[0]].props.children[ttbb.position[1]] = this.moveToLocButton(ttbb.obj, ttbb.position[1]);
+                        break;
+                    case "interaction":
+                        if(freePositionsInteract[0].length == 0)currRow++;
+                        RowToAssignTo[currRow].props.children[freePositionsInteract[0].shift()] = 
+                        <Button objectToRepresent={ttbb.obj}  clickFunction={(e,key)=>{this.props.interactionFunc(e,key)}}/>;
+                    break;
+                    case "item":
+                        if(freePositionsInventory[0].length == 0)currRow++;
+                        RowToAssignTo[currRow].props.children[freePositionsInventory[0].shift()] = 
+                        <Button objectToRepresent={ttbb.obj}  clickFunction={(e,key)=>{this.props.interactionFunc(e,key)}}/>;
+                    break;
+                }
         });
-
+        if(insertDefaults!=false){
+            switch (insertDefaults){
+                case "inventory":
+                    RowToAssignTo[2].props.children[4] = this.backButton();
+                break;
+                case "normal":
+                    RowToAssignTo[0].props.children[4] = this.inventoryButton();                
+                break;
+            }
+        }
     };
 
-    buildOptionList = (cL, st, interaction = null, combat = null) => {
+    BasePage = (cL) =>{
+        var buttonsToBeRendered = [];
+
+        cL.leadsTo.find((element) => { if( element.movementType === "up"){
+            buttonsToBeRendered.push({obj:element,position:[1,0],type:"up"}) }})
+        cL.leadsTo.find((element) => { if( element.movementType === "north"){
+            buttonsToBeRendered.push({obj:element,position:[1,1],type:"north"}) }})
+        cL.leadsTo.find((element) => { if( element.movementType === "down"){
+            buttonsToBeRendered.push({obj:element,position:[1,2],type:"down"}) }})
+        cL.leadsTo.find((element) => { if( element.movementType === "west"){
+            buttonsToBeRendered.push({obj:element,position:[2,0],type:"west"}) }})
+        cL.leadsTo.find((element) => { if( element.movementType === "south"){
+            buttonsToBeRendered.push({obj:element,position:[2,1],type:"south"}) }})
+        cL.leadsTo.find((element) => { if( element.movementType === "east"){
+            buttonsToBeRendered.push({obj:element,position:[2,2],type:"east"}) }})
+        if(cL.objects) buttonsToBeRendered=buttonsToBeRendered.concat(cL.objects.map( x => ({obj:x, position:[]})));
+        return buttonsToBeRendered;
+    }
+
+    buildOptionList = (cL, st= null, interaction = null, combat = null) => {
         var pagesNumber;
-        var freePositions;
+        var freePositionsInteract;
         //Builds a row full of disabled buttons
         var mainRow = this.buildEmptyActionBar()
-        //Now what should we render?
-        //(st === ?)
+        //Default page in case something goes wrong, this is to be the 'root'
+        var backupPage = this.BasePage(cL);
 
-        //Normal game movement stuff and interacting
-        if (st === "normal") {
-            //0,4 -> inventory button
-            //1,0 to 1,2 -> up, north, down
-            //2,0 to 2,2 -> west, south, east
-            if (cL.objects && cL.objects.length != 0) {
-                console.log("found!")
-                //pagesNumber = Math.ceil(cL.objects.length / 8);
-                let currObj = 0;
-                freePositions = [[0, 1, 2, 3], [3, 4], [3, 4]];
-                freePositions.forEach((val,index)=>{
-                    val.forEach((vl,indx)=>{
-                        if(currObj>=cL.objects.length){return};                        
-                        console.log("Found object at " + index + " " + vl);
-                        mainRow[index].props.children[vl]=<Button objectToRepresent={cL.objects[currObj]}  clickFunction={(e,key)=>{this.props.interactionFunc(e,key)}}/>;
-                        currObj++;
-                    })
-                })
-            }
-            //First we grab the buttons for movement
-            mainRow[1].props.children[0] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.movementType === "up" }))
-            mainRow[1].props.children[1] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.movementType === "north" }))
-            mainRow[1].props.children[2] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.movementType === "down" }))
-            mainRow[2].props.children[0] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.movementType === "west" }))
-            mainRow[2].props.children[1] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.movementType === "south" }))
-            mainRow[2].props.children[2] = this.moveToLocButton(cL.leadsTo.find((element) => { return element.movementType === "east" }))
-
-            mainRow[0].props.children[4] = this.inventoryButton();  //Inventory
-            mainRow[1].props.children[4] = this.inventoryButton();  //Rest
-            
-        } else if (st === "interact") {
-            
-        } else if (st === "combat") { }
-
-        //return the list once everything is done
+        //render the default page at the start, other conditionals to follow
+        if(st=="normal" || st==null){
+            this.AssignButtons(this.BasePage(cL), mainRow);            
+        }else if(st=="inventory"){
+            var crapToRender = this.props.playerInfo.inventory.map( x => ({obj:x, position:[]}))
+            this.AssignButtons(crapToRender, mainRow, "inventory");                        
+        }else{
+            console.log("Couldn't determine what to render on the action bar!")
+            this.AssignButtons(this.BasePage(cL), mainRow);                        
+        }
         return mainRow;
     }
 }

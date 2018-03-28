@@ -1,0 +1,25 @@
+[
+    //Location
+    {
+        "name": "<name>",
+        "internalName": "<name_for_lookup>",
+        "icon": "",
+        "entryPoint": false,
+        "description": ["your description"],
+        "X": 1,
+        "Y": 1,
+        "leadsTo": [
+            //movement buttons here
+        ],
+        "objects":[
+            //interactables here
+        ]
+    },
+    //Movement Button - an interactable
+    //Objects of type movement should have an attached coordinated, wich is used to place them into the action bar
+    //Movement type dictates their position and content of button
+    //Movement should be left inside leadsTo, put them inside objects when moving onto secondary sublevels that don't warrant their own map display.
+    {"name": "<name>", "type":"<type_of_object>","X": 0, "Y": 1, "movementType": "west", "text": "You leave the PA office"},
+    //Object/thing/character/etc - also an interactable
+    {"name": "<name>", "type":"<type_of_object>"}
+]
