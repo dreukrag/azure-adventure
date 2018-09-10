@@ -11,11 +11,12 @@ export default class MiniMap extends React.Component {
     canvas;
     ctx;
 
-    isCurrentLocation = (x,y) => (this.props.currentLocation.X ===x && this.props.currentLocation.Y === y?true:false)
+    isCurrentLocation = (x,y) => (this.props.currentLocation.get('X') ===x && this.props.currentLocation.get('Y') === y?true:false)
 
     componentDidUpdate = () => {
+        console.log(this.props.mapList);
         this.clearCanvas(this.ctx, this.canvas);
-        this.DrawTiles(this.props.currentLocation.X, this.props.currentLocation.Y, 3, this.props.mapList);
+        this.DrawTiles(this.props.currentLocation.get('X'), this.props.currentLocation.get('Y'), 3, this.props.mapList);
     }
 
     componentDidMount = () => {
@@ -40,7 +41,7 @@ export default class MiniMap extends React.Component {
         for (var x = -1 * r; x <= r; x++) {
             for (var y = -1 * r; y <= r; y++) {
                 Draw(map.find((e) => {
-                    return e.X === rX + x && e.Y === rY + y;
+                    return e.get('X') === rX + x && e.get('Y') === rY + y;
                 }), x, y);
             }
         }
@@ -106,10 +107,10 @@ export default class MiniMap extends React.Component {
 
     GetVectors = (obj) =>
         (
-            obj.leadsTo.map((mbr) =>
+            obj.get('leadsTo').map((mbr) =>
                 ({
-                    X: (mbr.X - obj.X) / ((mbr.X - obj.X) ** 2 + (mbr.Y - obj.Y) ** 2) ** 0.5,
-                    Y: (mbr.Y - obj.Y) / ((mbr.X - obj.X) ** 2 + (mbr.Y - obj.Y) ** 2) ** 0.5
+                    X: (mbr.get('X') - obj.get('X')) / ((mbr.get('X') - obj.get('X')) ** 2 + (mbr.get('Y') - obj.get('Y')) ** 2) ** 0.5,
+                    Y: (mbr.get('Y') - obj.get('Y')) / ((mbr.get('X') - obj.get('X')) ** 2 + (mbr.get('Y') - obj.get('Y')) ** 2) ** 0.5
                 })
             )
         )

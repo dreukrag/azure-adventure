@@ -7,7 +7,7 @@ export default class OptionBar extends React.Component {
         <div className="option-bar__cont">
             <div className="option-bar__main">
                 <p className="option-bar__locationName">
-                {this.props.currentLocation.name}
+                {this.props.currentLocation.get('name')}
                 </p>
                 <MiniMap currentLocation={this.props.currentLocation} mapList={this.props.mapList}/>
 

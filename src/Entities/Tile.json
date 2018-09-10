@@ -1,0 +1,8 @@
+{
+    "name": "none",
+    "entryPoint": false,
+    "description": ["You shouldn't be seeing this"],
+    "X": 0,
+    "Y": 0,
+    "leadsTo": []
+}

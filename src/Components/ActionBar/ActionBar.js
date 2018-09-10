@@ -17,7 +17,7 @@ export default class ActionBar extends React.Component {
         if (typeof lt === "undefined") { return this.disabledButton(n) }
         var a = (
             <button key={n} onClick={(e) => { this.props.moveFunc(e, lt) }}>
-                {lt.name}
+                {lt.get('name')}
             </button>
         )
         return a
@@ -40,14 +40,14 @@ export default class ActionBar extends React.Component {
     }
 
     //The default button set is the movement + inventory + actions
-    AssignButtons = (thingsToBecomeButtons:[{obj:{}, position:[]}], RowToAssignTo, insertDefaults="normal") => {
+    AssignButtons = (thingsToBecomeButtons:[{obj:{}, position:[]}], RowToAssignTo, insertDefaults=false) => {
         if(RowToAssignTo == undefined)return;
         var currRow = 0;
         var freePositionsInteract = [[0, 1, 2, 3], [3, 4], [3, 4]];
         var freePositionsInventory = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3]];
         
         thingsToBecomeButtons.forEach((ttbb) => {
-                switch(ttbb.obj.type){
+                switch(ttbb.obj.get('type')){
                     case "movement":
                         RowToAssignTo[ttbb.position[0]].props.children[ttbb.position[1]] = this.moveToLocButton(ttbb.obj, ttbb.position[1]);
                         break;
@@ -77,20 +77,20 @@ export default class ActionBar extends React.Component {
 
     BasePage = (cL) =>{
         var buttonsToBeRendered = [];
-
-        cL.leadsTo.find((element) => { if( element.movementType === "up"){
+        cL.get('leadsTo').find((element) => { if( element.get('movementType') === "up"){
             buttonsToBeRendered.push({obj:element,position:[1,0],type:"up"}) }})
-        cL.leadsTo.find((element) => { if( element.movementType === "north"){
+        cL.get('leadsTo').find((element) => { if( element.get('movementType') === "north"){
             buttonsToBeRendered.push({obj:element,position:[1,1],type:"north"}) }})
-        cL.leadsTo.find((element) => { if( element.movementType === "down"){
+        cL.get('leadsTo').find((element) => { if( element.get('movementType') === "down"){
             buttonsToBeRendered.push({obj:element,position:[1,2],type:"down"}) }})
-        cL.leadsTo.find((element) => { if( element.movementType === "west"){
+        cL.get('leadsTo').find((element) => { if( element.get('movementType') === "west"){
             buttonsToBeRendered.push({obj:element,position:[2,0],type:"west"}) }})
-        cL.leadsTo.find((element) => { if( element.movementType === "south"){
+        cL.get('leadsTo').find((element) => { if( element.get('movementType') === "south"){
             buttonsToBeRendered.push({obj:element,position:[2,1],type:"south"}) }})
-        cL.leadsTo.find((element) => { if( element.movementType === "east"){
+        cL.get('leadsTo').find((element) => { if( element.get('movementType') === "east"){
             buttonsToBeRendered.push({obj:element,position:[2,2],type:"east"}) }})
         if(cL.objects) buttonsToBeRendered=buttonsToBeRendered.concat(cL.objects.map( x => ({obj:x, position:[]})));
+        console.log(buttonsToBeRendered);
         return buttonsToBeRendered;
     }
 
@@ -104,13 +104,13 @@ export default class ActionBar extends React.Component {
 
         //render the default page at the start, other conditionals to follow
         if(st=="normal" || st==null){
-            this.AssignButtons(this.BasePage(cL), mainRow);            
+            this.AssignButtons(this.BasePage(cL), mainRow, "normal");            
         }else if(st=="inventory"){
             var crapToRender = this.props.playerInfo.inventory.map( x => ({obj:x, position:[]}))
             this.AssignButtons(crapToRender, mainRow, "inventory");                        
         }else{
             console.log("Couldn't determine what to render on the action bar!")
-            this.AssignButtons(this.BasePage(cL), mainRow);                        
+            this.AssignButtons(this.BasePage(cL), mainRow, "normal");                        
         }
         return mainRow;
     }
