@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from './Button';
+import {Seq, fromJS, Map} from 'immutable';
+
 export default class ActionBar extends React.Component {
 
     render = () => (
@@ -45,7 +47,7 @@ export default class ActionBar extends React.Component {
         var currRow = 0;
         var freePositionsInteract = [[0, 1, 2, 3], [3, 4], [3, 4]];
         var freePositionsInventory = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3]];
-        
+        console.log(thingsToBecomeButtons)
         thingsToBecomeButtons.forEach((ttbb) => {
                 switch(ttbb.obj.get('type')){
                     case "movement":
@@ -106,7 +108,9 @@ export default class ActionBar extends React.Component {
         if(st=="normal" || st==null){
             this.AssignButtons(this.BasePage(cL), mainRow, "normal");            
         }else if(st=="inventory"){
-            var crapToRender = this.props.playerInfo.inventory.map( x => ({obj:x, position:[]}))
+            //var crapToRender = this.props.playerInfo.inventory.map( x => ({obj:x, position:[]}))
+            var crapToRender = this.props.playerInventory.map( x => ({obj:fromJS(x), position:[]}))
+            //var crapToRender = fromJS(this.props.playerInfo.inventory).map(x => ({obj:x, position:[]})).toObject();
             this.AssignButtons(crapToRender, mainRow, "inventory");                        
         }else{
             console.log("Couldn't determine what to render on the action bar!")

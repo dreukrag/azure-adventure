@@ -83,7 +83,7 @@
             "internalName": "secCheckpoint_liftAccess",
             "icon": "landing",
             "entryPoint": false,
-            "description": ["Guards wielding assault rifles and more often then not full armor suits stand guard and an awfull lot of cameras seem to be tracking your everymove.","The bare metal walls are all covered with textured plastic panels and wooden pillars are used to cover support beams. Cushioned benchs are avaible next to the walls on both sides","The garden of the previous corridor ends into a small plaze before a row of elevators providing access to the rest of the station."],
+            "description": ["Guards wielding assault rifles and more often then not full armor suits stand guard and an awfull lot of cameras seem to be tracking your everymove.","The bare metal walls are all covered with textured plastic panels and wooden pillars are used to cover support beams. Cushioned benchs are avaible next to the walls on both sides","The garden of the previous corridor ends into a small plaza before the row of elevators providing access to the rest of the station.","People come and go as they please, with the odd cargo carrier moving something"],
             "X": 0,
             "Y": 2,
             "leadsTo": [
