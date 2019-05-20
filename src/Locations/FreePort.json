@@ -1,0 +1,109 @@
+{
+    "name": "Freeport",
+    "description": "Freeport station is the closest major 'civilised' port to the Azure sector. Despite being on the very edge of lenarian territory its 'civilised' status is agressively enforced by the local law enforcement. Critics however will point out that it's just as rotten on the inside as Azure.",
+    "mapVariables":[
+        {"var":"hasGoneTroughCustoms","val":false}
+    ],
+    "map": [
+        {
+            "name": "Landing Bay A",
+            "internalName": "landingBay_A",
+            "icon": "landing",
+            "entryPoint": false,
+            "description": ["This is the access walkway to the lower landing bays, several lifts are avaiable to take you down to the desired bay.", "The bays area itself is made up of several 'U' shaped bays for medium sized ships. The inside of each bay is covered in grav-anchors and the bay itself is filled with access ports for refueling and cleaning equipment.","It's quite busy with most of them occupied and a steady flow of cargo personnel going in and out trough the access doors."],
+            "X":-1,
+            "Y": 0,
+            "leadsTo": [
+                {"X": -2, "Y": 0, "name": "West", "type":"movement","movementType": "west", "text": "You move across the bulkhead to the next bay"},
+                {"X": 0, "Y": 0, "name": "East", "type":"movement","movementType": "east", "text": "You move across the bulkhead to the next bay"}
+            ]
+        },
+        {
+            "name": "Landing Bay B",
+            "internalName": "landingBay_B",
+            "icon": "landing",
+            "entryPoint": true,
+            "description": ["Dockbay B walkway is rather unremarkable, the bay itself tough suffered heavy damage, it seems an accident disabled most of it, with all the access lifts being closed.", "The bays area itself is made up of several 'U' shaped bays for medium sized ships. The inside of each bay is covered in grav-anchors and the bay itself is filled with access ports for refueling and cleaning equipment, all of wich are heavily damaged if not outright destroyed.","Despite the damage this bay is just as busy with workers repairing the damage and every now and them a drone hauls large parts of wreckage towards the repair bay"],
+            "X":0,
+            "Y": 0,
+            "leadsTo": [
+                {"X": -1, "Y": 0, "name": "West", "type":"movement","movementType": "west", "text": "You move across the bulkhead to the next bay"},
+                {"X": 1, "Y": 0, "name": "East", "type":"movement","movementType": "east", "text": "You move across the bulkhead to the next bay"},
+                {"X": 0, "Y": 1, "name": "North", "type":"movement","movementType": "north", "text": "The security door opens as you aproach it, letting you inside the security checkpoint"}
+            ]
+        },
+        {
+            "name": "Landing Bay C",
+            "internalName": "landingBay_C",
+            "icon": "landing",
+            "entryPoint": false,
+            "description": ["Landing bay C is meant for smaller shuttle-craft. From this walkway you gaze down upon the landing space, dotted with hexagonal docks with access roads separating each of them.","This high-tech parking lot for small craft is quite busy, altough not to the point of lacking parking space. Ships are constantly arriving and departing, many of them rentals.","On the northern wall are the private docking bays. It is covered with hexagonal blast-doors, reminding you of a honeycomb.","The traffic in and out of them is rather busy, with low-cost models making up the bulk of it.","This walkway is rather busy, arrivals of all types come and go, and the access lifts always getting full before moving."],
+            "X":1,
+            "Y": 0,
+            "leadsTo": [
+                {"X": 0, "Y": 0, "name": "West", "type":"movement","movementType": "west", "text": "You move across the bulkhead to the next bay"}
+            ]
+        },
+        {
+            "name": "Security Checkpoint - Entrance",
+            "internalName": "secCheckpoint_entrance",
+            "icon": "",
+            "entryPoint": false,
+            "description": ["This is the entrance area of the landing bays custom/security checkpoint. Guards wielding assault rifles and more often then not full armor suits stand guard and an awfull lot of cameras seem to be tracking your everymove.","For such militarized space it's design is remarkably pleasant. The bare metal walls were all covered with textured plastic panels and wooden pillars are used to cover support beams. Actually cushioned benchs are avaible next to the walls on both sides and the corridor itself is split in two by a small garden. You notice what seems to be wild-life, insects and birds, roaming arround in it. On closer inspection tough, they're all holograms.","There are plenty of signs informing new arrivals of what they can and cannot bring into freeport proper in various languages as well as expected rules of behavior.","An office to the east is labelled 'Port Authority' and it's doors remains open."],
+            "X": 0,
+            "Y": 1,
+            "leadsTo": [
+                {"X": -1, "Y": 1, "name": "West", "type":"movement","movementType": "west", "text": "","textClosed": "You wave your hand in front on the door's access panel but it simply beeps and remains closed", "closed":true},
+                {"X": 1, "Y": 1, "name": "East", "type":"movement","movementType": "east", "text": "You enter the office trough the open door"},
+                {"X": 0, "Y": 2, "name": "North", "type":"movement","movementType": "north", "text": "You wave your hand in front of the access panel. It beeps twice and them opens.","textClosed":"You aproach the arrival's gate and wave your hand in front of its access panel. It flashes red and refuses to open.", "closed":"hasGoneTroughCustoms"},
+                {"X": 0, "Y": 0, "name": "South", "type":"movement","movementType": "south", "text": ""}                
+            ]
+        },
+        {
+            "name": "Port Authority",
+            "internalName": "secCheckPoint_portEntr",
+            "icon": "",
+            "entryPoint": false,
+            "description": ["The port authority office reeks of bureocracy. It's interior design is very similar to the outside corridor but the furniture inside is incredibly cheap and bare.","A holo-monitor hangs from the ceiling displaying the avaiable booths whilst playing generic comercials in between.","A myriad of holo-posters hang on the wall above the benches for those waiting to be serviced."],
+            "X": 1,
+            "Y": 1,
+            "leadsTo": [
+                {"X": 0, "Y": 1, "name": "West", "type":"movement","movementType": "west", "text": "You leave the PA office"},
+                {"X": 1, "Y": 2, "name": "North", "type":"movement","movementType": "north", "text": "", "textClosed": "You wave your hand in front on the door's access panel but it simply beeps and remains closed", "closed":true}
+            ],
+            "objects":[
+                {"name":"Bureaucrat","type":"interaction","key":"freeport_entrance_bureaucrat"},
+                {"name":"test1","type":"interaction","key":""},
+                {"name":"test2","type":"interaction","key":""},
+                {"name":"test3","type":"interaction","key":""}                
+            ]
+        },
+        {
+            "name": "Security Checkpoint - Elevator access",
+            "internalName": "secCheckpoint_liftAccess",
+            "icon": "landing",
+            "entryPoint": false,
+            "description": ["Guards wielding assault rifles and more often then not full armor suits stand guard and an awfull lot of cameras seem to be tracking your everymove.","The bare metal walls are all covered with textured plastic panels and wooden pillars are used to cover support beams. Cushioned benchs are avaible next to the walls on both sides","The garden of the previous corridor ends into a small plaza before the row of elevators providing access to the rest of the station.","People come and go as they please, with the odd cargo carrier moving something"],
+            "X": 0,
+            "Y": 2,
+            "leadsTo": [
+                {"X": 0, "Y": 3, "name": "North", "type":"movement","movementType": "north", "text": "You enter one of the lifts"},
+                {"X": 0, "Y": 1, "name": "South", "type":"movement","movementType": "south", "text": ""}                
+            ]
+        },
+        {
+            "name": "Access Elevator",
+            "internalName": "secCheckpoint_lift",
+            "icon": "lift",
+            "entryPoint": false,
+            "description": ["You're inside one of the access elevators.","This lift is quite roomy, being made mostly out of plexiglass giving you a privileged view of the station"],
+            "X": 0,
+            "Y": 3,
+            "leadsTo": [
+                {"name": "Market Plaza", "type":"movement","movementType": "area", "text": ["You press the button labelled 'Market Plaza'.","You feel the sudden acceleration as the turbo lift moves to your destination"]},
+                {"name": "Residential", "type":"movement","movementType": "area", "text": ["You press the button labelled 'Market Plaza'.","You feel the sudden acceleration as the turbo lift moves to your destination"], "textClosed":"After you press the button, a mechanical sounding voice responds 'ERROR AREA NOT AVAIABLE'", "closed":true},
+                {"X": 0, "Y": 2, "name": "Leave", "type":"movement","movementType": "south", "text": ""}
+            ]
+        }
+    ]
+}

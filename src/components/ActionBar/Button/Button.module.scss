@@ -1,0 +1,41 @@
+@import "variables.scss";
+
+$buttonMargin: 3px;
+.main {
+  background-color: $sec;
+  border-radius: 15px;
+  border: none;
+  height: calc((100% - 6 * 3px) / 3);
+  width: calc((100% - 10 * 3px) / 5);
+  margin: 3px;
+  position: relative;
+  &.disabled {
+    background-color: $main;
+  }
+  .descriptionBox {
+    position: absolute;
+    transform: translateY(-120%);
+    border: solid 1px $sec;
+    border-radius: 6px;
+    padding: 6px;
+    max-height: 200px;
+    max-width: 200px;
+    width: fit-content;
+    height: fit-content;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: $main-faded;
+    &.hide {
+      display: none;
+    }
+    &.show {
+      display: flex;
+    }
+    .description {
+      color: white;
+    }
+  }
+  .text {
+    color: white;
+  }
+}
